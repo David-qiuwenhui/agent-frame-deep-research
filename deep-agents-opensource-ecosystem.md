@@ -134,6 +134,8 @@ graph TB
 | 维度 | Deep Agents | XAgent (xorbitsai) | FinRobot | GPT-Researcher |
 |------|-------------|---------------------|----------|----------------|
 | **GitHub Stars** | 新项目 | 254 (新) | 7,008 | ~20,000 |
+| **编程语言** | Python（另有 JS/TS 版 deepagentsjs） | Python (80%) + TypeScript (16%) | Python + Jupyter Notebook | Python (55%) + TypeScript (32%) |
+| **使用语言** | Python（JS/TS 需用 deepagentsjs） | Python | Python | Python（前端可用 JS/TS SDK） |
 | **Planning 能力** | write_todos() | 动态规划引擎 | 8 Agent 协作调度 | Planner + Executor |
 | **MCP 原生** | 是（自发现） | 有限 | 否 | 否 |
 | **金融领域** | 通用 | 通用（企业） | 专项金融 | 通用（研究） |
@@ -154,6 +156,8 @@ graph TB
 | GitHub | [langchain-ai/deepagents](https://github.com/langchain-ai/deepagents) |
 | 官方 | [langchain.com/deep-agents](https://www.langchain.com/deep-agents) |
 | 生产指南 | [docs.langchain.com/going-to-production](https://docs.langchain.com/oss/python/deepagents/going-to-production) |
+| 编程语言 | Python（另有 JS/TS 版 [deepagentsjs](https://github.com/langchain-ai/deepagentsjs)） |
+| 使用语言 | Python |
 
 **核心能力与项目匹配**：
 
@@ -266,6 +270,8 @@ graph TB
 | 许可证 | Apache 2.0 |
 | 官网 | [finrobot.ai](https://finrobot.ai/) |
 | 论文 | [arXiv:2405.14767](https://arxiv.org/html/2405.14767v2) |
+| 编程语言 | Python + Jupyter Notebook |
+| 使用语言 | Python（`pip install finrobot`） |
 
 ### 6.2 核心架构
 
@@ -323,6 +329,8 @@ graph TB
 | Stars | ~20,000 |
 | 官网 | [gptr.dev](https://gptr.dev/) |
 | 许可证 | MIT |
+| 编程语言 | Python (55%) + TypeScript (32%) |
+| 使用语言 | Python（`pip install gpt-researcher`），前端可用 JS/TS SDK |
 
 **核心架构**：Planner + Executor + Editor 多 Agent
 
@@ -355,6 +363,8 @@ graph TB
 |------|------|
 | GitHub | [PrefectHQ/fastmcp](https://github.com/PrefectHQ/fastmcp) |
 | 定位 | Python 快速构建 MCP Server |
+| 编程语言 | Python (99%+) |
+| 使用语言 | Python（`pip install fastmcp`） |
 
 **教程**：[Firecrawl FastMCP 教程](https://www.firecrawl.dev/blog/fastmcp-tutorial-building-mcp-servers-python) | [FastAPI 集成](https://www.speakeasy.com/mcp/framework-guides/building-fastapi-server)
 
@@ -364,6 +374,8 @@ graph TB
 |------|------|
 | GitHub | [mem0ai/mem0](https://github.com/mem0ai/mem0) |
 | MCP Server 版 | [mem0.ai/openmemory](https://mem0.ai/openmemory) |
+| 编程语言 | Python (53%) + TypeScript (42%) |
+| 使用语言 | Python（`pip install mem0ai`）和 TypeScript（`npm install mem0ai`），双 SDK 一等公民 |
 | 后端支持 | 20+ 向量存储 |
 | 框架集成 | 13 个框架（含 LangChain/LangGraph） |
 
@@ -374,6 +386,8 @@ graph TB
 | GitHub | [langfuse/langfuse](https://github.com/langfuse/langfuse) |
 | Stars | 23,400+ |
 | 定位 | Agent 可观测性/追踪/评估 |
+| 编程语言 | TypeScript (94%)，Next.js 应用 |
+| 使用语言 | Python（`pip install langfuse`）和 TypeScript（`npm install langfuse`），双 SDK |
 
 **对金融系统价值**：合规审计要求每次 Agent 决策可追溯。
 
@@ -484,16 +498,16 @@ graph TB
 
 ### 10.2 各组件选型理由
 
-| 组件 | 选型 | 理由 |
-|------|------|------|
-| Agent 框架 | **Deep Agents** | Planning-first、MCP 原生、`deepagents deploy` 一体化部署 |
-| 审批流程 | **LangGraph** | 人机协作 + 持久化 + JP Morgan/Uber 等生产验证 |
-| 架构参考 | **FinRobot** | 金融领域最成熟（7k Stars），8 Agent 协作模式 |
-| 规划参考 | **GPT-Researcher** | Planner+Executor 分离模式，可移植到文档分析 |
-| 企业参考 | **XAgent** | 多租户/VM 沙箱/RAG 知识系统设计参考 |
-| MCP Server | **FastMCP** | Pythonic、90% 代码减少、生产就绪 |
-| 记忆层 | **Mem0 / OpenMemory** | 20+ 后端、13 框架集成、MCP Server 版可用 |
-| 可观测性 | **Langfuse** | 开源（23k Stars）、LangGraph 原生集成、审计追踪 |
+| 组件 | 选型 | 编程语言 | 使用语言 | 理由 |
+|------|------|---------|---------|------|
+| Agent 框架 | **Deep Agents** | Python | Python | Planning-first、MCP 原生、`deepagents deploy` 一体化部署 |
+| 审批流程 | **LangGraph** | Python | Python / JS/TS | 人机协作 + 持久化 + JP Morgan/Uber 等生产验证 |
+| 架构参考 | **FinRobot** | Python + Jupyter | Python | 金融领域最成熟（7k Stars），8 Agent 协作模式 |
+| 规划参考 | **GPT-Researcher** | Python + TypeScript | Python | Planner+Executor 分离模式，可移植到文档分析 |
+| 企业参考 | **XAgent** | Python + TypeScript | Python | 多租户/VM 沙箱/RAG 知识系统设计参考 |
+| MCP Server | **FastMCP** | Python | Python | Pythonic、90% 代码减少、生产就绪 |
+| 记忆层 | **Mem0 / OpenMemory** | Python + TypeScript | Python / JS/TS | 20+ 后端、13 框架集成、MCP Server 版可用 |
+| 可观测性 | **Langfuse** | TypeScript | Python / JS/TS | 开源（23k Stars）、LangGraph 原生集成、审计追踪 |
 
 ### 10.3 实施路径
 
