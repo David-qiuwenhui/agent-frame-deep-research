@@ -349,7 +349,71 @@ graph LR
 | 调试难度 | 较低（图可视化） | 较高（动态行为难追踪） |
 | 适用复杂度 | 中等复杂工作流 | 高复杂度开放式任务 |
 
-### 4.5 适用场景
+### 4.5 固定路径 vs 动态路径：LangGraph 与 Dify 的本质相似性
+
+LangGraph 和 Dify 虽然形态不同（代码定义 vs 可视化拖拽），但核心逻辑一致：**先画图，后运行**。所有可能的节点和路径在执行前就已确定。
+
+```mermaid
+graph LR
+    subgraph 三种自动化模式
+        D["Dify<br/>可视化流水线"]
+        LG["LangGraph<br/>代码定义的状态图"]
+        DA["Deep Agents<br/>运行时涌现的工作流"]
+    end
+
+    D -->|"同样原理"| LG
+    LG -->|"本质区别"| DA
+
+    D -.- FIXED1["图由人定义<br/>路径固定"]
+    LG -.- FIXED2["图由开发者定义<br/>路径固定（含条件分支）"]
+    DA -.- DYNAMIC["图由 LLM 在运行时<br/>动态决定"]
+
+    style D fill:#f5f5f5,stroke:#616161
+    style LG fill:#e3f2fd,stroke:#1565c0
+    style DA fill:#fce4ec,stroke:#c62828
+```
+
+> **一句话概括**：LangGraph ≈ 代码版的 Dify（图固定，编排方式不同），Deep Agents ≈ 真正的自主 Agent（图是运行时涌现的）。
+
+#### 三者自动化程度对比
+
+| | Dify | LangGraph | Deep Agents |
+|---|---|---|---|
+| **图由谁定义** | 人在可视化编辑器里拖拽 | 开发者在代码里写 `add_node` + `add_edge` | LLM 在运行时动态决定 |
+| **能走哪些路** | 固定（画了几条就是几条） | 固定（代码写了几条就是几条） | 不固定（LLM 每步自行选择） |
+| **条件分支** | 有限的条件判断节点 | `conditional_edge`，运行时选路径，但候选路径固定 | 无预定义路径，LLM 自由决策 |
+| **类比** | **流水线**（传送带路线固定，物品走固定工位） | **有岔路的地铁网**（可以换乘，但轨道是铺好的） | **出租车**（司机根据路况自主选路） |
+
+#### conditional_edge 的"自主性"误区
+
+LangGraph 的 `conditional_edge` 容易让人误以为它有"自主性"。实际上它只是**在预定义的候选路径中选择**——就像地铁到站后可以换乘 A 线或 B 线，但你不可能开出轨道去走一条没铺的路。
+
+```mermaid
+graph TD
+    subgraph LangGraph_Conditional["LangGraph conditional_edge"]
+        N1["节点 A"] --> CE{"conditional_edge<br/>运行时选择"}
+        CE -->|"候选路径 1"| N2["节点 B"]
+        CE -->|"候选路径 2"| N3["节点 C"]
+        CE -->|"候选路径 3"| N4["节点 D"]
+    end
+
+    subgraph DeepAgents_Dynamic["Deep Agents 动态决策"]
+        N5["当前步骤"] --> LLM{"LLM 自由决策<br/>无预定义路径"}
+        LLM -->|"可以是任何行动"| ANY["任意工具/推理/跳转<br/>由 LLM 即时决定"]
+    end
+
+    CE -.- NOTE1["⚠️ 候选路径在编译时<br/>就已经固定"]
+    LLM -.- NOTE2["✅ 每一步都是自由的<br/>不受预定义约束"]
+
+    style LangGraph_Conditional fill:#e3f2fd,stroke:#1565c0
+    style DeepAgents_Dynamic fill:#fce4ec,stroke:#c62828
+    style NOTE1 fill:#fff9c4,stroke:#f9a825
+    style NOTE2 fill:#e8f5e9,stroke:#2e7d32
+```
+
+> **实践意义**：审批流程（路径固定、需要合规可追溯）适合用 LangGraph；文档对比分析（每次分析策略可能不同）适合用 Deep Agents。两者互补而非替代。
+
+### 4.6 适用场景
 
 | 场景 | 说明 |
 |------|------|
@@ -359,7 +423,7 @@ graph LR
 | 复杂数据处理 | 多源数据获取→清洗→分析→报告生成 |
 | 自主 Agent | 需要 Agent 自主规划和执行的场景 |
 
-### 4.6 局限性
+### 4.7 局限性
 
 - **项目较新**：2026 年 3 月发布，生态和社区仍在建设中
 - **可预测性较低**：动态工作流依赖 LLM 决策，结果不完全可控
