@@ -498,16 +498,16 @@ graph TB
 
 ### 10.2 各组件选型理由
 
-| 组件 | 选型 | 编程语言 | 使用语言 | 理由 |
-|------|------|---------|---------|------|
-| Agent 框架 | **Deep Agents** | Python | Python | Planning-first、MCP 原生、`deepagents deploy` 一体化部署 |
-| 审批流程 | **LangGraph** | Python | Python / JS/TS | 人机协作 + 持久化 + JP Morgan/Uber 等生产验证 |
-| 架构参考 | **FinRobot** | Python + Jupyter | Python | 金融领域最成熟（7k Stars），8 Agent 协作模式 |
-| 规划参考 | **GPT-Researcher** | Python + TypeScript | Python | Planner+Executor 分离模式，可移植到文档分析 |
-| 企业参考 | **XAgent** | Python + TypeScript | Python | 多租户/VM 沙箱/RAG 知识系统设计参考 |
-| MCP Server | **FastMCP** | Python | Python | Pythonic、90% 代码减少、生产就绪 |
-| 记忆层 | **Mem0 / OpenMemory** | Python + TypeScript | Python / JS/TS | 20+ 后端、13 框架集成、MCP Server 版可用 |
-| 可观测性 | **Langfuse** | TypeScript | Python / JS/TS | 开源（23k Stars）、LangGraph 原生集成、审计追踪 |
+| 组件         | 选型                    | 编程语言                | 使用语言           | 理由                                              |
+| ---------- | --------------------- | ------------------- | -------------- | ----------------------------------------------- |
+| Agent 框架   | **Deep Agents**       | Python              | Python         | Planning-first、MCP 原生、`deepagents deploy` 一体化部署 |
+| 审批流程       | **LangGraph**         | Python              | Python / JS/TS | 人机协作 + 持久化 + JP Morgan/Uber 等生产验证               |
+| 架构参考       | **FinRobot**          | Python + Jupyter    | Python         | 金融领域最成熟（7k Stars），8 Agent 协作模式                  |
+| 规划参考       | **GPT-Researcher**    | Python + TypeScript | Python         | Planner+Executor 分离模式，可移植到文档分析                  |
+| 企业参考       | **XAgent**            | Python + TypeScript | Python         | 多租户/VM 沙箱/RAG 知识系统设计参考                          |
+| MCP Server | **FastMCP**           | Python              | Python         | Pythonic、90% 代码减少、生产就绪                          |
+| 记忆层        | **Mem0 / OpenMemory** | Python + TypeScript | Python / JS/TS | 20+ 后端、13 框架集成、MCP Server 版可用                   |
+| 可观测性       | **Langfuse**          | TypeScript          | Python / JS/TS | 开源（23k Stars）、LangGraph 原生集成、审计追踪               |
 
 ### 10.3 实施路径
 
